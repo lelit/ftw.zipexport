@@ -9,12 +9,12 @@ from StringIO import StringIO
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.event import notify
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
+@implementer(IZipRepresentation)
 class FolderZipRepresentation(NullZipRepresentation):
-    implements(IZipRepresentation)
     adapts(IFolderish, Interface)
 
     def get_files(self, path_prefix=u"", recursive=True, toplevel=True):
@@ -44,8 +44,8 @@ class FolderZipRepresentation(NullZipRepresentation):
                 yield item
 
 
+@implementer(IZipRepresentation)
 class FileZipRepresentation(NullZipRepresentation):
-    implements(IZipRepresentation)
     adapts(IATFile, Interface)
 
     def get_files(self, path_prefix=u"", recursive=True, toplevel=True):

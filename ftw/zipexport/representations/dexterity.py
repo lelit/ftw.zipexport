@@ -9,7 +9,7 @@ from StringIO import StringIO
 from zope.component import adapts
 from zope.component import getAdapter
 from zope.event import notify
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 from plone.namedfile.interfaces import HAVE_BLOBS
@@ -17,8 +17,8 @@ if HAVE_BLOBS:
     from plone.namedfile.interfaces import IBlobby
 
 
+@implementer(IZipRepresentation)
 class DexterityItemZipRepresentation(NullZipRepresentation):
-    implements(IZipRepresentation)
     adapts(IDexterityItem, Interface)
 
     def get_files(self, path_prefix=u"", recursive=True, toplevel=True):

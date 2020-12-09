@@ -1,10 +1,10 @@
 from ftw.zipexport.interfaces import IContainerZippedEvent
 from ftw.zipexport.interfaces import IItemZippedEvent
-from zope.interface import implements
+from zope.interface import implementer
 
 
+@implementer(IContainerZippedEvent)
 class ContainerZippedEvent(object):
-    implements(IContainerZippedEvent)
 
     def __init__(self, obj, comment=None, action=None, actor=None, time=None):
         self.object = obj
@@ -14,8 +14,8 @@ class ContainerZippedEvent(object):
         self.time = time
 
 
+@implementer(IItemZippedEvent)
 class ItemZippedEvent(object):
-    implements(IItemZippedEvent)
 
     def __init__(self, obj, comment=None, action=None, actor=None, time=None):
         self.object = obj

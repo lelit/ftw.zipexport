@@ -1,14 +1,14 @@
 from ftw.zipexport.interfaces import IZipRepresentation
 from zope.component import adapts
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 
 
+@implementer(IZipRepresentation)
 class NullZipRepresentation(object):
     """
     defualt zip export implementation
     """
-    implements(IZipRepresentation)
     adapts(Interface, Interface)
 
     def __init__(self, context, request):
