@@ -1,13 +1,13 @@
 from ftw.zipexport.events import ItemZippedEvent
 from ftw.zipexport.interfaces import IZipRepresentation
 from ftw.zipexport.representations.general import NullZipRepresentation
-from plone.dexterity.interfaces import IDexterityItem
+from plone.dexterity.interfaces import IDexterityContainer, IDexterityItem
 from plone.namedfile.interfaces import INamedField
 from plone.rfc822.interfaces import IPrimaryFieldInfo
 from Products.CMFPlone.utils import safe_unicode
 from io import BytesIO
 from zope.component import adapts
-from zope.component import getAdapter
+from zope.component import getAdapter, getMultiAdapter
 from zope.event import notify
 from zope.interface import implementer
 from zope.interface import Interface
@@ -43,3 +43,33 @@ class DexterityItemZipRepresentation(NullZipRepresentation):
             return (path, named_file.open())
         else:
             return (path, BytesIO(named_file.data))
+
+
+@implementer(IZipRepresentation)
+class DexterityContainerZipRepresentation(NullZipRepresentation):
+    adapts(IDexterityContainer, Interface)
+
+    def get_files(self, path_prefix="", recursive=True, toplevel=True):
+        if not recursive:
+            return
+
+        if not toplevel:
+            if getattr(self.context, 'zipexport_title', None):
+                title = safe_unicode(self.context.zipexport_title)
+            else:
+                title = safe_unicode(self.context.Title())
+            path_prefix = '{0}/{1}'.format(safe_unicode(path_prefix), title)
+
+        contents = self.context.objectValues()
+        if not contents:
+            # Create an empty folder
+            yield (path_prefix, None)
+
+        for content in contents:
+            adapt = getMultiAdapter((content, self.request),
+                                    interface=IZipRepresentation)
+
+            for item in adapt.get_files(path_prefix=path_prefix,
+                                        recursive=recursive,
+                                        toplevel=False):
+                yield item

@@ -11,8 +11,7 @@
     <adapter zcml:condition="installed Products.ATContentTypes" factory=".archetypes.ImageZipRepresentation" />
 
     <!-- Dexterity default representations -->
-    <configure zcml:condition="installed plone.app.dexterity">
-        <adapter factory=".dexterity.DexterityItemZipRepresentation" />
-    </configure>
+    <adapter zcml:condition="installed plone.app.dexterity" factory=".dexterity.DexterityContainerZipRepresentation" />
+    <adapter zcml:condition="installed plone.app.dexterity" factory=".dexterity.DexterityItemZipRepresentation" />
 
 </configure>
