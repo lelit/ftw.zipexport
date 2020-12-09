@@ -49,7 +49,7 @@ class TestZipGeneration(TestCase):
 
     def test_generator_raises_exception_when_not_used_as_generator(self):
         zipgenerator = ZipGenerator()
-        self.assertRaises(StandardError, zipgenerator.generate)
+        self.assertRaises(RuntimeError, zipgenerator.generate)
 
     def test_generator_raises_exception_when_files_added_after_generate(self):
         file = create(Builder("file")
@@ -66,7 +66,7 @@ class TestZipGeneration(TestCase):
 
             zipgenerator.generate()
 
-            self.assertRaises(StandardError, zipgenerator.add_file, file_rep)
+            self.assertRaises(RuntimeError, zipgenerator.add_file, file_rep)
 
     def test_generator_creates_unique_file_names(self):
         folder = create(Builder('folder').titled(u"folder"))

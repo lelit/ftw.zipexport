@@ -5,7 +5,7 @@ from plone.dexterity.interfaces import IDexterityItem
 from plone.namedfile.interfaces import INamedField
 from plone.rfc822.interfaces import IPrimaryFieldInfo
 from Products.CMFPlone.utils import safe_unicode
-from StringIO import StringIO
+from io import BytesIO
 from zope.component import adapts
 from zope.component import getAdapter
 from zope.event import notify
@@ -42,5 +42,4 @@ class DexterityItemZipRepresentation(NullZipRepresentation):
         if HAVE_BLOBS and IBlobby.providedBy(named_file):
             return (path, named_file.open())
         else:
-            stream_data = StringIO(named_file.data)
-            return (path, stream_data)
+            return (path, BytesIO(named_file.data))

@@ -5,7 +5,7 @@ from Products.ATContentTypes.interfaces.file import IATFile
 from Products.ATContentTypes.interfaces.image import IATImage
 from Products.CMFCore.interfaces import IFolderish
 from Products.CMFPlone.utils import safe_unicode
-from StringIO import StringIO
+from io import BytesIO
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.event import notify
@@ -61,7 +61,7 @@ class FileZipRepresentation(NullZipRepresentation):
         else:
             # For example this is the case if `self.context` is an instance
             # of `izug.ticketbox.content.attachment.TicketAttachment`.
-            return StringIO(file_.data)
+            return BytesIO(file_.data)
 
 
 class ImageZipRepresentation(FileZipRepresentation):

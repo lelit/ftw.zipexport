@@ -1,4 +1,3 @@
-from exceptions import IOError
 from ftw.zipexport.utils import normalize_path
 from ftw.zipexport.zipfilestream import ZipFile
 from Products.CMFPlone.utils import safe_unicode
@@ -65,8 +64,8 @@ class ZipGenerator(object):
         try:
             self.zip_file.writefile(file_pointer, file_path)
         except RuntimeError:
-            raise StandardError("ZipFile already generated/closed. "
-                                "Please add all files before generating.")
+            raise RuntimeError("ZipFile already generated/closed. "
+                               "Please add all files before generating.")
         self.empty = False
 
     def generate_unique_filepath(self, file_path):
@@ -76,7 +75,7 @@ class ZipGenerator(object):
         path, name = os.path.split(file_path)
         name, ext = os.path.splitext(name)
 
-        for i in xrange(2, sys.maxint):
+        for i in range(2, sys.maxint):
             new_filename = os.path.join(path, '%s (%d)%s' % (name, i, ext))
             if new_filename not in self.zip_file.namelist():
                 return new_filename
@@ -96,7 +95,6 @@ class ZipGenerator(object):
 
     def generate(self):
         if self.tmp_file is None:
-            raise StandardError(
-                "Please use ZipGenerator as a context manager.")
+            raise RuntimeError("Please use ZipGenerator as a context manager.")
         self.zip_file.close()
         return self.tmp_file
