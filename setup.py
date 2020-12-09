@@ -55,7 +55,7 @@ setup(name='ftw.zipexport',
         'ftw.upgrade',
         'path.py',
         'rfc6266',
-        'zope.app.file < 4.0.0',
+        'zope.app.file',
         # -*- Extra requirements: -*-
         ],
       tests_require=tests_require,
