@@ -1,0 +1,47 @@
+# Italian translation for ftw.zipexport
+# Lele Gaifax <lele@metapensiero.it>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: ftw.zipexport 1.6.5\n"
+"POT-Creation-Date: 2015-04-15 15:05+0000\n"
+"PO-Revision-Date: 2020-12-09 18:21+0100\n"
+"Last-Translator: Lele Gaifax <lele@metapensiero.it>\n"
+"Language: it\n"
+"Language-Team: Italian <it@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Preferred-Encodings: utf-8 latin1\n"
+
+#: ./ftw/zipexport/profiles/default/actions.xml
+#: ./ftw/zipexport/profiles/documentaction/actions.xml
+msgid "Export as Zip"
+msgstr "Esporta come ZIP"
+
+#: ./ftw/zipexport/profiles/default/actions.xml
+#: ./ftw/zipexport/profiles/documentaction/actions.xml
+msgid "Export data from plone into a zip archive."
+msgstr "Esporta il contenuto in un archivio ZIP."
+
+#. Default: "No zip-exportable content has been found."
+#: ./ftw/zipexport/browser/zipexportview.py:95
+msgid "statmsg_no_exportable_content_found"
+msgstr "Non è stato trovato alcun contenuto esportabile."
+
+#. Default: "No zip-exportable content selected."
+#: ./ftw/zipexport/browser/zipexportview.py:31
+msgid "statmsg_no_exportable_content_selected"
+msgstr "Non è stato selezionato alcun contenuto esportabile."
+
+#. Default: "There is not enough free space on the disk to create the zip-file."
+#: ./ftw/zipexport/browser/zipexportview.py:37
+msgid "statmsg_not_enough_space_on_disk"
+msgstr "Non c'è sufficiente spazio libero sul disco per creare l'archivio ZIP."
+
+#. Default: "Content is too big to export"
+#: ./ftw/zipexport/browser/zipexportview.py:64
+msgid "statmsg_zip_file_too_big"
+msgstr "Il contenuto è troppo grande per essere esportato."
+
+
