@@ -5,10 +5,10 @@
 
     <adapter factory=".general.NullZipRepresentation" />
 
-    <!-- Arechetypes default representations -->
-    <adapter factory=".archetypes.FolderZipRepresentation" />
-    <adapter factory=".archetypes.FileZipRepresentation" />
-    <adapter factory=".archetypes.ImageZipRepresentation" />
+    <!-- Archetypes default representations -->
+    <adapter zcml:condition="installed Products.ATContentTypes" factory=".archetypes.FolderZipRepresentation" />
+    <adapter zcml:condition="installed Products.ATContentTypes" factory=".archetypes.FileZipRepresentation" />
+    <adapter zcml:condition="installed Products.ATContentTypes" factory=".archetypes.ImageZipRepresentation" />
 
     <!-- Dexterity default representations -->
     <configure zcml:condition="installed plone.app.dexterity">
