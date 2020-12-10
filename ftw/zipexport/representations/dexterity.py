@@ -1,6 +1,7 @@
 from ftw.zipexport.events import ItemZippedEvent
 from ftw.zipexport.interfaces import IZipRepresentation
 from ftw.zipexport.representations.general import NullZipRepresentation
+from plone import api
 from plone.dexterity.interfaces import IDexterityContainer, IDexterityItem
 from plone.namedfile.interfaces import INamedField
 from plone.rfc822.interfaces import IPrimaryFieldInfo
@@ -60,13 +61,13 @@ class DexterityContainerZipRepresentation(NullZipRepresentation):
                 title = safe_unicode(self.context.Title())
             path_prefix = '{0}/{1}'.format(safe_unicode(path_prefix), title)
 
-        contents = self.context.objectValues()
-        if not contents:
+        brains = api.content.find(self.context, depth=1)
+        if not brains:
             # Create an empty folder
             yield (path_prefix, None)
 
-        for content in contents:
-            adapt = getMultiAdapter((content, self.request),
+        for brain in brains:
+            adapt = getMultiAdapter((brain.getObject(), self.request),
                                     interface=IZipRepresentation)
 
             for item in adapt.get_files(path_prefix=path_prefix,
